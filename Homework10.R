@@ -92,10 +92,11 @@ legend("topleft", c("Invasive","Native"), col=c("red","blue"), pch=c(19,19), tit
 
 
 ########################### model ###############
-model<-lmer(Invasive.Algae.Mass~Native.Algae.Mass*Location*Treatment+(1+Native.Algae.Mass|Location)+(1+Treatment|Location), data=algae)
+
+model<-lmer(Invasive.Algae.Mass~Native.Algae.Mass*Treatment*Water.Depth+(1+Native.Algae.Mass|Location)+(1+Treatment|Location)+(1+Water.Depth|Location), data=algae)
 summary(model)
 
-
+library(lmerTest)
 step(model)
 
 
