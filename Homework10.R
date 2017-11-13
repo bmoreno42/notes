@@ -1,4 +1,4 @@
-# Name: Byanca Moreno
+# Name:
 
 # While diving off Pūpūkea Beach you notice an algae that you have never seen before.
 
