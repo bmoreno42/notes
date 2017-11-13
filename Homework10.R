@@ -92,37 +92,11 @@ legend("topleft", c("Invasive","Native"), col=c("red","blue"), pch=c(19,19), tit
 
 
 ########################### model ###############
-model<-lm(Invasive.Algae.Mass~Native.Algae.Mass+Location+Treatment, data=algae)
+model<-lmer(Invasive.Algae.Mass~Native.Algae.Mass*Location*Treatment+(1+Native.Algae.Mass|Location)+(1+Treatment|Location), data=algae)
 summary(model)
 
 
-
-mod<-lmer(Invasive.Algae.Mass~comb.treat.depth+(1|Location), data=algae) #location as a random effect
-summary(mod)
-anova(mod)
-
-
-boxplot(Invasive.Algae.Mass~Location, data=algae)
-boxplot(Invasive.Algae.Mass~Treatment, data=algae)
-boxplot(Invasive.Algae.Mass~Water.Depth, data=algae)
-
-mean.invasive.shallow<-mean(algae[algae[,4]=="shallow",6]) # 35.4605
-mean.invasive.deep<-mean(algae[algae[,4]=="deep",6]) # 36.436
-
-mean.invasive.caged<-mean(algae[algae[,3]=="caged",6]) # 32.94262
-mean.invasive.noncaged<-mean(algae[algae[,3]=="non-caged",6]) #38.95388
-
-
-mean.native.shallow<-mean(algae[algae[,4]=="shallow",5]) # 20.07625
-mean.native.deep<-mean(algae[algae[,4]=="deep",5]) # 20.005
-
-mean.native.caged<-mean(algae[algae[,3]=="caged",5]) # 20
-mean.native.noncaged<-mean(algae[algae[,3]=="non-caged",5]) # 20.08125
-
-
-# Std.Dev gives us a measure of how much variability in invasive algae mass is due to variation among location
-#Residual is still what we're unable to explain in our model
-
+step(model)
 
 
 ######## notes for Byanca #################
