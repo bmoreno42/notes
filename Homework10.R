@@ -2,8 +2,6 @@
 
 # While diving off Pūpūkea Beach you notice an algae that you have never seen before.
 
-# Do parrotfish at other beaches keep down this algal invader. 
-
 # Question: Do parrotfish have an effect on invasive Macroalgae cover? 
 
 # You suspect there might be an effect of water depth. 
@@ -98,7 +96,7 @@ model<-lm(Invasive.Algae.Mass~Native.Algae.Mass+Location+Treatment, data=algae)
 summary(model)
 
 
-mod<-lmer(Invasive.Algae.Mass~comb.location.depth+(1|Location), data=algae) #location as a random effect
+mod<-lmer(Invasive.Algae.Mass~comb.treat.depth+(1|Location), data=algae) #location as a random effect
 summary(mod)
 anova(mod)
 
