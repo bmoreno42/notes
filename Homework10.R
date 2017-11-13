@@ -44,53 +44,6 @@ boxplot(algae[,5]~comb.location.treat.waterdepth, las=2, cex.axis=.5 , ylab="", 
 legend("topleft", c("Invasive","Native"), col=c("red","blue"), pch=c(19,19), title="Legend")
 
 
-# Doesn't seem to be a difference in mass based on location/treatment in native species- mass is pretty consistent 
-# Within the invasive species there is a difference since there is a gap between Queen, Sunset and the other locations
-
-########## combining location and treatment #############
-#this allows us to deal with the non-independence by assuming a different "baseline" of location and treatment for each beach
-
-comb.location.treat<-paste(algae[,2],algae[,4],sep="")
-par(fig=c(0,1,.1,1))
-boxplot(algae[,6]~comb.location.treat, las=2, cex.axis=.5 , ylab="mass", ylim=c(15,55), col=c("red"))
-par(cex.axis=1, cex.lab=1, cex.main=2, cex.sub=1)
-par(new=T)
-boxplot(algae[,5]~comb.location.treat, las=2, cex.axis=.5 , ylab="", ylim=c(15,55), col=c("blue"))
-legend("topleft", c("Invasive","Native"), col=c("red","blue"), pch=c(19,19), title="Legend")
-
-# for native there is really no difference in mass based on beach and treatment
-# for invasice there is a difference in mass based on on beach and treatment
-
-########## combining treatment and water depth #############
-#this allows us to deal with the non-independence by assuming a different "baseline" for each treatment and water depth
-comb.treat.depth<-paste(algae[,3],algae[,4],sep="")
-par(fig=c(0,1,.1,1))
-boxplot(algae[,6]~comb.treat.depth, las=2, cex.axis=.5 , ylab="mass", ylim=c(15,55), col=c("red"))
-par(cex.axis=1, cex.lab=1, cex.main=2, cex.sub=1)
-par(new=T)
-boxplot(algae[,5]~comb.treat.depth, las=2, cex.axis=.5 , ylab="", ylim=c(15,55), col=c("blue"))
-legend("topleft", c("Invasive","Native"), col=c("red","blue"), pch=c(19,19), title="Legend")
-
-# for native there doesn't seem to be a difference in mass based on treatment and water depth
-# for invasive there seems to be a difference between caged and non-caged treatments but not based on water depth
-
-
-########## combining location and water depth #############
-#this allows us to deal with the non-independence by assuming a different "baseline" for each location and water depth
-comb.location.depth<-paste(algae[,2],algae[,4],sep="")
-par(fig=c(0,1,.1,1))
-boxplot(algae[,6]~comb.location.depth, las=2, cex.axis=.5 , ylab="mass", ylim=c(15,55), col=c("red"))
-par(cex.axis=1, cex.lab=1, cex.main=2, cex.sub=1)
-par(new=T)
-boxplot(algae[,5]~comb.location.depth, las=2, cex.axis=.5 , ylab="", ylim=c(15,55), col=c("blue"))
-legend("topleft", c("Invasive","Native"), col=c("red","blue"), pch=c(19,19), title="Legend")
-
-
-
-# for native there doesn't seem to be a difference in mass based on location and water depth
-# for invasive there seems to be a difference between Queens, Sunset beaches and the other beaches
-
-
 ########################### model ###############
 
 model<-lmer(Invasive.Algae.Mass~Native.Algae.Mass*Treatment*Water.Depth+(1+Native.Algae.Mass|Location)+(1+Treatment|Location)+(1+Water.Depth|Location), data=algae)
