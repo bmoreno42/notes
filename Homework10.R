@@ -1,4 +1,4 @@
-# Name:
+# Name: Byanca Moreno
 
 # While diving off Pūpūkea Beach you notice an algae that you have never seen before.
 
@@ -43,10 +43,12 @@ par(new=T)
 boxplot(algae[,5]~comb.location.treat.waterdepth, las=2, cex.axis=.5 , ylab="", ylim=c(15,55), col=c("blue"))
 legend("topleft", c("Invasive","Native"), col=c("red","blue"), pch=c(19,19), title="Legend")
 
+#seems some variation in invasive but not in native
+
 
 ########################### model ###############
 
-model<-lmer(Invasive.Algae.Mass~Native.Algae.Mass*Treatment*Water.Depth+(1+Native.Algae.Mass|Location)+(1+Treatment|Location)+(1+Water.Depth|Location), data=algae)
+model<-lmer(Invasive.Algae.Mass~Native.Algae.Mass*Treatment*Water.Depth+(1+Native.Algae.Mass|Location)+(1+Treatment|Location)+(1+Water.Depth|Location), data=algae,REML=F)
 summary(model)
 
 library(lmerTest)
